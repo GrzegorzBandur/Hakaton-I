@@ -1,16 +1,43 @@
 import re
 import pickle
 
+licencje = {'gnu gpl': 'gnu gpl',
+            'general public license': 'gnu gpl',
+            'guile': 'gnu gpl',
+            'x11 license': 'gnu gpl',
+            'mit license': 'gnu gpl',
+            'gnu free documentation license': 'gnu gpl',
+            'gnu lgpl': 'gnu lgpl',
+            'gnu lesser general public license': 'gnu lgpl',
+            'bsd': 'bsd',
+            'freeware': 'freeware',
+            'gnu fdl': 'gnu fdl',
+            'creative commons': 'creative commons',
+            'u¿ycie niekomercyjne': 'creative commons',
+            'design science license': 'design science license',
+            'free art license': 'free art license',
+            'licencja wolnej sztuki': 'free art license',
+            'public domain': 'public domain',
+            'domena publiczna': 'public domain',
+            'domeny publicznej': 'public domain'
+            }
 tagi = [r'^Recno:: ([0-9]+)$', r'^URL:: (.*)$', r'^ParseText::$', r'^Content::$', r'^Version: (-?[0-9]+)$', r'^url: (.*)$', r'^base: (.*)$', r'^contentType: (.*)$', r'^metadata: (.*)$', r'^Content:$']
 
 nutch = file(r'../../../all/deviantart.txt')
-dane = []
+dane = [{'id':'start'}]
 status = ''
 
 for linia in nutch:
     #print linia
     if re.match(tagi[0], linia):
-        print '-------------nowa strona-------------'
+        #print '-------------nowa strona-------------'
+        for klucz in licencje.iterkeys():
+            if klucz in dane[-1].get('text', '').lower():
+                dane[-1]['license'] = licencje[klucz]
+                print dane[-1]['id'], licencje[klucz]
+        if not 'license' in dane[-1]:
+            #print 'BRAK LICENCJI', dane[-1]['id']
+            dane.pop()
         status = ''
         dane.append({})
         #dane[-1]['recno'] = re.match(tagi[0], linia).groups()[0]
@@ -58,7 +85,7 @@ for linia in nutch:
         #dane[-1]['Content'] += linia
         pass
         
-plik = file(r'../../../all/deviantart_parsed.txt', 'w')
+plik = file(r'../../../all/deviantart_parsed_filtered.txt', 'w')
 pickle.dump(dane, plik)
 plik.close()
 
