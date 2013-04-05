@@ -23,7 +23,7 @@ licencje = {'gnu gpl': 'gnu gpl',
             }
 tagi = [r'^Recno:: ([0-9]+)$', r'^URL:: (.*)$', r'^ParseText::$', r'^Content::$', r'^Version: (-?[0-9]+)$', r'^url: (.*)$', r'^base: (.*)$', r'^contentType: (.*)$', r'^metadata: (.*)$', r'^Content:$']
 
-nutch = file(r'../../../all/deviantart.txt')
+nutch = file(r'../../../all/all(excluded deviantart).txt')
 dane = [{'id':'start'}]
 status = ''
 
@@ -85,7 +85,7 @@ for linia in nutch:
         #dane[-1]['Content'] += linia
         pass
         
-plik = file(r'../../../all/deviantart_parsed_filtered.txt', 'w')
+plik = file(r'../parsed_results/all(excluded deviantart)_parsed_filtered.txt', 'w')
 pickle.dump(dane, plik)
 plik.close()
 
