@@ -144,7 +144,8 @@ for linia in nutch:
     elif re.match(tagi[4], linia):
         #print '-------------wersja-------------'
         status = ''
-        dane[-1]['_version_'] = re.match(tagi[4], linia).groups()[0]
+        #dane[-1]['_version_'] = 1
+        #dane[-1]['_version_'] = re.match(tagi[4], linia).groups()[0]
     elif re.match(tagi[5], linia):
         #print '-------------url-------------'
         status = ''
