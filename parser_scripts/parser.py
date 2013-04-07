@@ -124,7 +124,7 @@ for linia in nutch:
                 dane[-1]['license'] = licencje[klucz]
                 print dane[-1]['id'], licencje[klucz]
                 break
-        if not 'licens' in dane[-1]:
+        if not 'license' in dane[-1]:
             for klucz in licencje_njdz.iterkeys():
                 if ('licen' in dane[-1].get('text', '').lower()) and (klucz in dane[-1].get('text', '').lower()):
                     dane[-1]['license'] = licencje_njdz[klucz]
