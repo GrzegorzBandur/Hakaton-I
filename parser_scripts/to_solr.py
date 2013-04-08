@@ -21,3 +21,7 @@ for nazwa_pliku in os.listdir(katalog):
     print 'dodaje od {0} do konca'.format(pocz)
     solr.add(dane[pocz:])
     print 'done', nazwa_pliku
+
+print 'optymalizuje baze solr'
+solr.optimize()
+print 'done'
